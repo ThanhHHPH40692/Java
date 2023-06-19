@@ -1,0 +1,1067 @@
+package views;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+import java.awt.HeadlessException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.QLDan;
+
+/**
+ *
+ * @author ADMIN
+ */
+public class View_QLDan extends javax.swing.JFrame {
+
+    private ArrayList<QLDan> list = new ArrayList<>();
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+    /**
+     * Creates new form View_QLDan
+     */
+    public View_QLDan() {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        chuChay();
+        new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    Calendar time = new GregorianCalendar();
+                    int hour = time.get(Calendar.HOUR);
+                    int minute = time.get(Calendar.MINUTE);
+                    int second = time.get(Calendar.SECOND);
+                    int pm_am = time.get(Calendar.AM_PM);
+
+                    String date = dateFormat.format(time.getTime());
+                    String day_night;
+                    if (pm_am == 1) {
+                        day_night = "PM";
+                    } else {
+                        day_night = "AM";
+                    }
+                    String dongho = hour + ":" + minute + ":" + second + " - " + day_night + " " + date;
+                    txtTime.setText(dongho);
+                }
+            }
+        }.start();
+
+        this.setLocationRelativeTo(null);
+        list.add(new QLDan("kv01", "Danguitar abc", BigDecimal.valueOf(500000),
+                2, 23.5, "Gỗ Xoan"));
+        list.add(new QLDan("kv02", "Danguitar bcd", BigDecimal.valueOf(600000),
+                3, 40.7, "Gỗ Hồng Đào"));
+        list.add(new QLDan("kv03", "Danguitar cde", BigDecimal.valueOf(700000),
+                1, 43.4, "Gỗ Thông"));
+        list.add(new QLDan("kv04", "Danguitar edf", BigDecimal.valueOf(800000),
+                4, 29.9, "Gỗ Cẩm Lai"));
+        list.add(new QLDan("kv05", "Danguitar fjk", BigDecimal.valueOf(900000),
+                2, 56.7, "Gỗ Sồi"));
+        list.add(new QLDan("kv06", "Danguitar fes", BigDecimal.valueOf(950000),
+                3, 33.2, "Gỗ Hồng Mộc"));
+        list.add(new QLDan("kv07", "Danguitar deb", BigDecimal.valueOf(720000),
+                1, 45.6, "Gỗ Hồng Đào"));
+        list.add(new QLDan("kv08", "Danguitar lbk", BigDecimal.valueOf(820000),
+                2, 27.8, "Gỗ Hương"));
+        list.add(new QLDan("kv09", "Danguitar jdk", BigDecimal.valueOf(780000),
+                4, 36.1, "Gỗ Sồi"));
+        list.add(new QLDan("kv10", "Danguitar cje", BigDecimal.valueOf(680000),
+                1, 41.3, "Gỗ Thông"));
+        loadTable();
+    }
+
+    private String date2String(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY");
+
+        return sdf.format(date);
+    }
+
+    // Hàm tự viết để chuyển đổi ngày tháng
+    private Date parseDate(String ngayThang) {
+        // Đối tượng hỗ trợ đọc kiểu dữ liệu ngày tháng
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        //String date = DateFormat.
+        try {
+            return sdf.parse(ngayThang);
+        } catch (Exception e) {
+            //Nếu lỗi trả về thời điểm hiện tại
+            return new Date();
+        }
+    }
+
+    public void chuChay() {
+        Thread th = new Thread() {
+            @Override
+            public void run() {
+                String text = txtChuChay.getText() + " ";
+                while (true) {
+                    // Phải qua trái 
+                    // text = text.substring(1, text.length()) + text.charAt(0);
+                    // Trái qua phải
+                    text = text.charAt(text.length() - 1) + text.substring(0, text.length() - 1);
+                    try {
+                        sleep(500);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(View_QLDan.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    txtChuChay.setText(text);
+                }
+            }
+        };
+        th.start();
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        txtChuChay = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtTable = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnLuu = new javax.swing.JButton();
+        btnThem = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
+        btnHienThi = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtID = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
+        txtPrice = new javax.swing.JTextField();
+        txtNumber = new javax.swing.JTextField();
+        txtChatLieu = new javax.swing.JComboBox<>();
+        btnExit = new javax.swing.JButton();
+        txtTime = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtKichThuoc = new javax.swing.JTextField();
+        btnDoc = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
+        txtNTT1 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtNTT2 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtNTT3 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        txtChuChay.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        txtChuChay.setForeground(new java.awt.Color(255, 51, 51));
+        txtChuChay.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtChuChay.setText("Quản Lí Đàn GuiTar");
+
+        txtTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        txtTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(txtTable);
+
+        jLabel2.setText("Mã SP");
+
+        jLabel3.setText("Tên SP");
+
+        btnLuu.setText("GhiFile");
+        btnLuu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLuuActionPerformed(evt);
+            }
+        });
+
+        btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
+
+        btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
+
+        btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
+
+        btnHienThi.setText("Hiển Thị");
+        btnHienThi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHienThiActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Đơn Giá");
+
+        jLabel6.setText("Số Lượng");
+
+        jLabel7.setText("Chất Liệu");
+
+        txtChatLieu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gỗ Thông", "Gỗ Hồng Mộc", "Gỗ Hồng Đào", "Gỗ Xoan", "Gỗ Bách Xanh", "Gỗ Dái Ngựa", "Gỗ Hương", "Gỗ Cẩm Lai ", "Gỗ Sồi", "Nhựa ", "Kim Loại", " ", " ", " " }));
+
+        btnExit.setText("Thoát");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+
+        txtTime.setText("00:00:00 AM ");
+
+        jLabel9.setText("Kích Thước");
+
+        btnDoc.setText("ĐọcFile");
+        btnDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDocActionPerformed(evt);
+            }
+        });
+
+        btnSearch.setText("TK");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        txtNTT1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNTT1ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Nhập KT  ");
+
+        txtNTT2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNTT2ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Nhập CL");
+
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Nhập Tên");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtChuChay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(94, 94, 94)
+                .addComponent(btnLuu)
+                .addGap(61, 61, 61)
+                .addComponent(btnDoc)
+                .addGap(67, 67, 67)
+                .addComponent(btnHienThi)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 36, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtTime)
+                                .addGap(424, 424, 424)
+                                .addComponent(btnExit))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtNTT3, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnXoa))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(txtNTT2, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnSua))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtNTT1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(29, 29, 29)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnSearch)
+                                            .addComponent(btnThem)))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(37, 37, 37))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtKichThuoc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(36, 36, 36)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtChatLieu, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(31, 31, 31))))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(txtChuChay, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5)
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel6)
+                    .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtKichThuoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel7)
+                    .addComponent(txtChatLieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLuu)
+                    .addComponent(btnDoc)
+                    .addComponent(btnHienThi)
+                    .addComponent(btnSearch))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNTT1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThem))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtNTT2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSua)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNTT3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnXoa))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnExit)
+                    .addComponent(txtTime))
+                .addGap(16, 16, 16))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void loadTable() {
+        DefaultTableModel model = (DefaultTableModel) txtTable.getModel();
+        model.setColumnCount(0);
+        model.addColumn("Mã Sản Phẩm");
+        model.addColumn("Tên Sản Phẩm");
+        model.addColumn("Đơn Giá");
+        model.addColumn("Số Lượng");
+        model.addColumn("Kích Thước");
+        model.addColumn("Chất Liệu");
+        model.setRowCount(0);
+        for (QLDan ds : list) {
+            Object[] row = new Object[]{
+                ds.getID(),
+                ds.getName(),
+                ds.getPrice(),
+                ds.getNumber(),
+                ds.getKichThuoc(),
+                ds.getChatLieu()
+            };
+            model.addRow(row);
+        }
+    }
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        checkValidateForm();
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    public void checkValidateForm() {
+        QLDan dan = new QLDan();
+        Boolean check = true;
+        int choice = txtTable.getSelectedRow();
+        if (choice == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa lựa chọn");
+            return;
+        }
+        // Lấy giá trị người dùng nhập
+        String maSp = txtID.getText();
+        String tenSp = txtName.getText();
+        Double gia = Double.valueOf(txtPrice.getText());
+        BigDecimal price = BigDecimal.valueOf(gia);
+        Integer soLuong = Integer.valueOf(txtNumber.getText());
+        Double kichThuoc = Double.valueOf(txtKichThuoc.getText());
+        String chatLieu = (String) txtChatLieu.getSelectedItem().toString();
+
+        dan.setID(txtID.getText());
+        if (txtID.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Trường ID không được để trống, mời bạn nhập vào", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            xoaDuLieu();
+            return;
+        } else if (txtName.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Trường name không được để trống, mời bạn nhập vào", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            xoaDuLieu();
+            return;
+        } else if (txtKichThuoc.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Trường kích thước không được để trống, mời bạn nhập vào", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            xoaDuLieu();
+            return;
+        } else if (txtNumber.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Trường số lượng không được để trống, mời bạn nhập vào", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            xoaDuLieu();
+            return;
+        } else if (txtPrice.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Trường giá không được để trống, mời bạn nhập vào", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            xoaDuLieu();
+            return;
+        }
+
+        // Kiểm tra xem ID đã tồn tại trong danh sách hay chưa
+        for (QLDan ds : list) {
+            if (ds.getID().equals(txtID.getText())) {
+                JOptionPane.showMessageDialog(null, "ID đã tồn tại, vui lòng nhập một ID khác", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                xoaDuLieu();
+                return;
+            }
+        }
+
+        // Kiểm tra xem ID có nhập quá kí tự cho phép không
+        String id = txtID.getText();
+        String iddb = "^[a-zA-Z0-9]+$"; // kiểm tra đúng định dạng
+        if (id.length() > 10) {
+            JOptionPane.showMessageDialog(null, "ID không được nhập quá 10 ký tự", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            xoaDuLieu();
+            return;
+        } else if (id.length() < 4) {
+            JOptionPane.showMessageDialog(null, "ID phải nhập từ 4 ký tự trở lên", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            xoaDuLieu();
+            return;
+        } else if (!id.matches(iddb)) {
+            JOptionPane.showMessageDialog(null, "ID không được chứa ký tự đặc biệt", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            xoaDuLieu();
+            return;
+        }
+
+        // Kiểm tra độ dài tên
+        String name = txtName.getText();
+        String namedb = "^[a-zA-Z0-9]+$";
+        if (name.length() > 30) {
+            JOptionPane.showMessageDialog(null, "Tên không được nhập quá 30 ký tự", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            xoaDuLieu();
+            return;
+        } else if (name.length() < 10) {
+            JOptionPane.showMessageDialog(null, "Tên phải nhập từ 10 ký tự trở lên", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            xoaDuLieu();
+            return;
+        } else if (!name.matches(namedb)) {
+            JOptionPane.showMessageDialog(null, "Tên không được chứa ký tự đặc biệt", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            xoaDuLieu();
+            return;
+        }
+
+        // Kiểm tra kích thước
+        try {
+            if (kichThuoc < 0) {
+                JOptionPane.showMessageDialog(null, "Kích thước không được nhỏ hơn 0", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                xoaDuLieu();
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Kích thước không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            xoaDuLieu();
+            return;
+        }
+
+        // Kiểm tra số lượng
+        try {
+
+            if (soLuong <= 0 || soLuong >= 10) {
+                JOptionPane.showMessageDialog(null, "Số lượng phải lớn hơn 0 và nhỏ hơn 10", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                xoaDuLieu();
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Số lượng không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            xoaDuLieu();
+            return;
+        }
+
+        // Kiểm tra đơn giá
+        try {
+            if (price.compareTo(BigDecimal.ZERO) < 0 || price.compareTo(BigDecimal.ZERO) == 0) {
+                JOptionPane.showMessageDialog(null, "Giá sản phẩm không được âm và bằng 0", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                xoaDuLieu();
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Giá không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            xoaDuLieu();
+            return;
+        }
+
+        // Hiển thị hộp thoại xác nhận
+        if (check) {
+            int option = JOptionPane.showConfirmDialog(rootPane, "Bạn có đồng ý thêm?", "Xác nhận",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (option == JOptionPane.YES_OPTION) {
+                // Xử lý khi người dùng đồng ý thêm 
+                dan.setName(txtName.getText());
+                dan.setPrice(new BigDecimal(txtPrice.getText()));
+                dan.setNumber(Integer.parseInt(txtNumber.getText()));
+                dan.setKichThuoc(Double.parseDouble(txtKichThuoc.getText()));
+                dan.setChatLieu(txtChatLieu.getSelectedItem().toString());
+                list.add(dan);
+                check = true;
+            } else if (option == JOptionPane.NO_OPTION) {
+                // Xử lý khi người dùng không đồng ý thêm
+                JOptionPane.showMessageDialog(rootPane, "Đã hủy thêm", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                check = false;
+            }
+        }
+
+        if (check) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn đã thêm thành công");
+        }
+        loadTable();
+    }
+
+    public void xoaDuLieu() {
+        // Xóa dữ liệu ở text fied
+        txtID.setText("");
+        txtName.setText("");
+        txtPrice.setText("");
+        txtNumber.setText("");
+        txtKichThuoc.setText("");
+        txtChatLieu.setSelectedIndex(0);
+    }
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        UpdateTT();
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    public void UpdateTT() {
+        QLDan dan = new QLDan();
+        int row = txtTable.getSelectedRow();
+        int choice = txtTable.getSelectedRow();
+        // B1 : tạo 1 biến ghi được chọn
+        if (choice == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa lựa chọn");
+            return;
+        }
+        boolean check = true;
+        if (row != -1) {
+            String maSp = txtID.getText();
+            String tenSp = txtName.getText();
+            Double gia = Double.valueOf(txtPrice.getText());
+            BigDecimal price = BigDecimal.valueOf(gia);
+            Integer soLuong = Integer.valueOf(txtNumber.getText());
+            Double kichThuoc = Double.valueOf(txtKichThuoc.getText());
+            String chatLieu = (String) txtChatLieu.getSelectedItem().toString();
+
+            dan.setID(txtID.getText());
+            if (txtID.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null, "Trường ID không được để trống, mời bạn nhập vào", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                xoaDuLieu();
+                return;
+            } else if (txtName.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null, "Trường name không được để trống, mời bạn nhập vào", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                xoaDuLieu();
+                return;
+            } else if (txtKichThuoc.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null, "Trường kích thước không được để trống, mời bạn nhập vào", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                xoaDuLieu();
+                return;
+            } else if (txtNumber.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null, "Trường số lượng không được để trống, mời bạn nhập vào", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                xoaDuLieu();
+                return;
+            } else if (txtPrice.getText().isBlank()) {
+                JOptionPane.showMessageDialog(null, "Trường giá không được để trống, mời bạn nhập vào", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                xoaDuLieu();
+                return;
+            }
+
+            // Kiểm tra xem ID đã tồn tại trong danh sách hay chưa
+//            for (QLDan ds : list) {
+//                if (ds.getID().equals(txtID.getText())) {
+//                    JOptionPane.showMessageDialog(null, "ID đã tồn tại, vui lòng nhập một ID khác", "Lỗi", JOptionPane.ERROR_MESSAGE);
+//                    xoaDuLieu();
+//                    return;
+//                }
+//            }
+            // Kiểm tra xem ID có nhập quá kí tự cho phép không
+            String id = txtID.getText();
+            String iddb = "^[a-zA-Z0-9]+$"; // kiểm tra đúng định dạng
+            if (id.length() > 10) {
+                JOptionPane.showMessageDialog(null, "ID không được nhập quá 10 ký tự", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                xoaDuLieu();
+                return;
+            } else if (id.length() < 4) {
+                JOptionPane.showMessageDialog(null, "ID phải nhập từ 4 ký tự trở lên", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                xoaDuLieu();
+                return;
+            } else if (!id.matches(iddb)) {
+                JOptionPane.showMessageDialog(null, "ID không được chứa ký tự đặc biệt", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                xoaDuLieu();
+                return;
+            }
+
+            // Kiểm tra độ dài tên
+            String name = txtName.getText();
+            String namedb = "^[a-zA-Z0-9]+$";
+            if (name.length() > 30) {
+                JOptionPane.showMessageDialog(null, "Tên không được nhập quá 30 ký tự", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                xoaDuLieu();
+                return;
+            } else if (name.length() < 10) {
+                JOptionPane.showMessageDialog(null, "Tên phải nhập từ 10 ký tự trở lên", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                xoaDuLieu();
+                return;
+            } else if (!name.matches(namedb)) {
+                JOptionPane.showMessageDialog(null, "Tên không được chứa ký tự đặc biệt", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                xoaDuLieu();
+                return;
+            }
+
+            // Kiểm tra kích thước
+            try {
+                if (kichThuoc <= 0) {
+                    JOptionPane.showMessageDialog(null, "Kích thước không được nhỏ hơn 0", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    xoaDuLieu();
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Kích thước không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                xoaDuLieu();
+                return;
+            }
+
+            // Kiểm tra số lượng
+            try {
+                if (soLuong <= 0 || soLuong >= 10) {
+                    JOptionPane.showMessageDialog(null, "Số lượng phải lớn hơn 0 và nhỏ hơn 10", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    xoaDuLieu();
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Số lượng không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                xoaDuLieu();
+                return;
+            }
+
+            // Kiểm tra đơn giá
+            try {
+                if (price.compareTo(BigDecimal.ZERO) < 0 || price.compareTo(BigDecimal.ZERO) == 0) {
+                    JOptionPane.showMessageDialog(null, "Giá sản phẩm không được âm và bằng 0", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    xoaDuLieu();
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Giá không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                xoaDuLieu();
+                return;
+            }
+
+            if (check == true) {
+                int option = JOptionPane.showConfirmDialog(rootPane, "Bạn có đồng ý sửa?", "Xác nhận",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+                if (option == JOptionPane.YES_OPTION) {
+                    // Xử lý khi người dùng đồng ý xóa 
+                    QLDan ql = list.get(row);
+                    ql.setID(maSp);
+                    ql.setName(tenSp);
+                    ql.setPrice(price);
+                    ql.setNumber(soLuong);
+                    ql.setKichThuoc(kichThuoc);
+                    ql.setChatLieu(chatLieu);
+                    loadTable();
+                    // 
+                    DefaultTableModel model = (DefaultTableModel) txtTable.getModel();
+                    model.setValueAt(maSp, row, 0);
+                    model.setValueAt(tenSp, row, 1);
+                    model.setValueAt(price, row, 2);
+                    model.setValueAt(soLuong, row, 3);
+                    model.setValueAt(kichThuoc, row, 4);
+                    model.setValueAt(chatLieu, row, 5);
+                    check = true;
+                } else if (option == JOptionPane.NO_OPTION) {
+                    // Xử lý khi người dùng không đồng ý xóa
+                    JOptionPane.showMessageDialog(rootPane, "Đã hủy sửa", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    check = false;
+                }
+            }
+            if (check == true) {
+                JOptionPane.showMessageDialog(rootPane, "Bạn đã sửa thành công");
+            }
+            // Xóa dữ liệu ở text fied
+            txtID.setText("");
+            txtName.setText("");
+            txtNumber.setText("");
+            txtPrice.setText("");
+            txtKichThuoc.setText("");
+            txtChatLieu.setSelectedIndex(0);
+        }
+    }
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        int row = txtTable.getSelectedRow();
+        int choice = txtTable.getSelectedRow();
+        boolean check = true;
+        // B1 : tạo 1 biến ghi được chọn
+        if (choice == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa lựa chọn");
+            return;
+        }
+        if (check) {
+            int option = JOptionPane.showConfirmDialog(rootPane, "Bạn có đồng ý xóa?", "Xác nhận",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (option == JOptionPane.YES_OPTION) {
+                // Xử lý khi người dùng đồng ý xóa 
+                list.remove(row);
+                loadTable();
+            } else if (option == JOptionPane.NO_OPTION) {
+                // Xử lý khi người dùng không đồng ý xóa
+                JOptionPane.showMessageDialog(rootPane, "Đã hủy xóa", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                check = false;
+            }
+        }
+        // Xóa dữ liệu ở text fied
+        txtID.setText("");
+        txtName.setText("");
+        txtNumber.setText("");
+        txtPrice.setText("");
+        txtKichThuoc.setText("");
+        txtChatLieu.setSelectedIndex(0);
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnHienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienThiActionPerformed
+        // TODO add your handling code here:
+        list.add(new QLDan("kv01", "Danguitar abc", BigDecimal.valueOf(500000),
+                2, 23.5, "Gỗ Xoan"));
+        list.add(new QLDan("kv02", "Danguitar bcd", BigDecimal.valueOf(600000),
+                3, 40.7, "Gỗ Hồng Đào"));
+        list.add(new QLDan("kv03", "Danguitar cde", BigDecimal.valueOf(700000),
+                1, 43.4, "Gỗ Thông"));
+        list.add(new QLDan("kv04", "Danguitar edf", BigDecimal.valueOf(800000),
+                4, 29.9, "Gỗ Cẩm Lai"));
+        list.add(new QLDan("kv05", "Danguitar fjk", BigDecimal.valueOf(900000),
+                2, 56.7, "Gỗ Sồi"));
+        list.add(new QLDan("kv06", "Danguitar fes", BigDecimal.valueOf(950000),
+                3, 33.2, "Gỗ Hồng Mộc"));
+        list.add(new QLDan("kv07", "Danguitar deb", BigDecimal.valueOf(720000),
+                1, 45.6, "Gỗ Hồng Đào"));
+        list.add(new QLDan("kv08", "Danguitar lbk", BigDecimal.valueOf(820000),
+                2, 27.8, "Gỗ Hương"));
+        list.add(new QLDan("kv09", "Danguitar jdk", BigDecimal.valueOf(780000),
+                4, 36.1, "Gỗ Sồi"));
+        list.add(new QLDan("kv10", "Danguitar cje", BigDecimal.valueOf(680000),
+                1, 41.3, "Gỗ Thông"));
+        loadTable();
+    }//GEN-LAST:event_btnHienThiActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        // TODO add your handling code here:
+        boolean check = true;
+        if (check) {
+            int option = JOptionPane.showConfirmDialog(rootPane, "Bạn có đồng ý thoát?", "Xác nhận",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+            if (option == JOptionPane.YES_OPTION) {
+                // Xử lý khi người dùng đồng ý xóa 
+                System.exit(0);
+                check = true;
+            } else if (option == JOptionPane.NO_OPTION) {
+                // Xử lý khi người dùng không đồng ý xóa
+                JOptionPane.showMessageDialog(rootPane, "Đã hủy thoát", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                check = false;
+            }
+        }
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    private void txtTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTableMouseClicked
+        // TODO add your handling code here:
+        int choice = txtTable.getSelectedRow();
+        // B1 : tạo 1 biến ghi được chọn
+        if (choice == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa lựa chọn");
+            return;
+        }
+        // B2 : Đọc thông tin từng cột
+        Object idStr = txtTable.getValueAt(choice, 0);
+        Object tenStr = txtTable.getValueAt(choice, 1);
+        Object giaStr = txtTable.getValueAt(choice, 2);
+        Object soLuongStr = txtTable.getValueAt(choice, 3);
+        Object kickThuocStr = txtTable.getValueAt(choice, 4);
+        Object chatLieuStr = txtTable.getValueAt(choice, 5);
+        // B3 : Đưa text fied tương ứng
+        String ma = idStr.toString();
+        String name = tenStr.toString();
+        BigDecimal price = new BigDecimal((giaStr.toString()));
+        Integer soLuong = Integer.parseInt(soLuongStr.toString());
+        Double kichThuoc = Double.parseDouble(kickThuocStr.toString());
+        String chatLieu = chatLieuStr.toString();
+        // B4 : Thiết lập giá trị 
+        txtID.setText(ma);
+        txtName.setText(name);
+        txtPrice.setText(price.toString());
+        txtNumber.setText(String.valueOf(soLuong));
+        txtKichThuoc.setText(kichThuoc.toString());
+        txtChatLieu.setSelectedItem(chatLieu);
+    }//GEN-LAST:event_txtTableMouseClicked
+
+    private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
+        try {
+            // TODO add your handling code here:
+            FileOutputStream fos = new FileOutputStream("todo.dat");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+            oos.writeObject(list);
+            System.out.println("Ghi thanh cong");
+            oos.close();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File khong ton tai ");
+        } catch (IOException ex) {
+            System.out.println("Loi doc ghi");
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btnLuuActionPerformed
+
+    private void btnDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocActionPerformed
+        // TODO add your handling code here:
+        loadData();
+        loadTable();
+    }//GEN-LAST:event_btnDocActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // Tìm kiếm file
+        double kt;
+        if (txtNTT1.getText().isEmpty() && txtNTT2.getText().isEmpty() && txtNTT3.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập thông tin cần tìm");
+        } else {
+            try {
+                // Kiểm tra nếu người dùng kh nhập sẽ trả về ô text fied 1 chuỗi rỗng
+                if (txtNTT1.getText().isEmpty()) {
+                    kt = 0;
+                } else {
+                    kt = Double.parseDouble(txtNTT1.getText());
+                }
+                String cl = txtNTT2.getText();
+                String name = txtNTT3.getText();
+                ArrayList<QLDan> dsList = findTT(kt, cl, name);
+                if (!dsList.isEmpty()) {
+                    DefaultTableModel model = (DefaultTableModel) txtTable.getModel();
+                    model.setRowCount(0);
+                    for (QLDan ds : dsList) {
+                        Object[] row = new Object[]{
+                            ds.getID(),
+                            ds.getName(),
+                            ds.getPrice(),
+                            ds.getNumber(),
+                            ds.getKichThuoc(),
+                            ds.getChatLieu()
+                        };
+                        model.addRow(row);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm có kích thước: " + kt + ", chất liệu: " + cl + " và tên: " + name);
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Kích thước không hợp lệ");
+            }
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    public ArrayList<QLDan> findTT(double kt, String cl, String name) {
+        ArrayList<QLDan> tk = new ArrayList<>();
+        for (QLDan ds : list) {
+            if ((kt == 0 || ds.getKichThuoc() == kt) && (cl.isEmpty()
+                    || ds.getChatLieu().contains(cl))
+                    && (name.isEmpty() || ds.getName().contains(name))) {
+                tk.add(ds);
+            }
+        }
+        return tk;
+    }
+
+    private void txtNTT2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNTT2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNTT2ActionPerformed
+
+    private void txtNTT1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNTT1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNTT1ActionPerformed
+
+    public void searchTable(QLDan ds) {
+        DefaultTableModel model = (DefaultTableModel) txtTable.getModel();
+        model.setRowCount(0);
+        Object[] row = new Object[]{
+            ds.getID(),
+            ds.getName(),
+            ds.getPrice(),
+            ds.getNumber(),
+            ds.getKichThuoc(),
+            ds.getChatLieu()
+        };
+        model.addRow(row);
+    }
+
+//    public QLDan findTT() {
+//        for (QLDan sv : list) {
+//            if (sv.getName().equalsIgnoreCase(txtNTT1.getText())) {
+//                return sv;
+//            }
+//        }
+//        return null;
+//    }
+    private void loadData() {
+        try {
+            FileInputStream fis = new FileInputStream("todo.dat");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            list = (ArrayList<QLDan>) ois.readObject();
+            System.out.println("Doc thanh cong");
+            ois.close();
+            fis.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("Khong tim thay file");
+        } catch (IOException ex) {
+            System.out.println("Khong doc duoc");
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Khong tim thay class");
+        }
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(View_QLDan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(View_QLDan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(View_QLDan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(View_QLDan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new View_QLDan().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDoc;
+    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnHienThi;
+    private javax.swing.JButton btnLuu;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnSua;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnXoa;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> txtChatLieu;
+    private javax.swing.JLabel txtChuChay;
+    private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtKichThuoc;
+    private javax.swing.JTextField txtNTT1;
+    private javax.swing.JTextField txtNTT2;
+    private javax.swing.JTextField txtNTT3;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtNumber;
+    private javax.swing.JTextField txtPrice;
+    private javax.swing.JTable txtTable;
+    private javax.swing.JLabel txtTime;
+    // End of variables declaration//GEN-END:variables
+
+}
