@@ -2,28 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DeThi3;
+package De3;
+
+import java.io.Serializable;
 
 /**
  *
  * @author ADMIN
  */
-public class SinhVien {
-   private String id;
-   private String name;
-   private String gender;
-   private String namSinh;
-   private double canNang;
+public class SinhVien implements Serializable{
+    private String id;
+    private String name;
+    private String gender;
+    private int namSinh;
 
     public SinhVien() {
     }
 
-    public SinhVien(String id, String name, String gender, String namSinh, double canNang) {
+    public SinhVien(String id, String name, String gender, int namSinh) {
         this.id = id;
         this.name = name;
         this.gender = gender;
         this.namSinh = namSinh;
-        this.canNang = canNang;
     }
 
     public String getId() {
@@ -50,21 +50,12 @@ public class SinhVien {
         this.gender = gender;
     }
 
-    public String getNamSinh() {
+    public int getNamSinh() {
         return namSinh;
     }
 
-    public void setNamSinh(String namSinh) {
+    public void setNamSinh(int namSinh) {
         this.namSinh = namSinh;
     }
-
-    public double getCanNang() {
-        return canNang;
-    }
-
-    public void setCanNang(double canNang) {
-        this.canNang = canNang;
-    }
-   
-   
+    
 }
