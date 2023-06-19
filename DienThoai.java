@@ -1,49 +1,71 @@
-package TEST1;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package De2;
 
 import java.io.Serializable;
 
-public class DienThoai implements Serializable{
-    private String TenSP;
-    private int Hang;
-    private float GiaSP;
+/**
+ *
+ * @author ADMIN
+ */
+public class DienThoai implements Serializable {
+
+    private String id;
+    private String hang;
+    private String mauSac;
+    private Integer gia;
+    private String boNho;
 
     public DienThoai() {
     }
 
-    public DienThoai(String TenSP, int Hang, float GiaSP) {
-        this.TenSP = TenSP;
-        this.Hang = Hang;
-        this.GiaSP = GiaSP;
+    public DienThoai(String id, String hang, String mauSac, Integer gia, String boNho) {
+        this.id = id;
+        this.hang = hang;
+        this.mauSac = mauSac;
+        this.gia = gia;
+        this.boNho = boNho;
     }
 
-    public String getTenSP() {
-        return TenSP;
+    public String getId() {
+        return id;
     }
 
-    public void setTenSP(String TenSP) {
-        this.TenSP = TenSP;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public int getHang() {
-        return Hang;
+    public String getHang() {
+        return hang;
     }
 
-    public void setHang(int Hang) {
-        this.Hang = Hang;
+    public void setHang(String hang) {
+        this.hang = hang;
     }
 
-    public float getGiaSP() {
-        return GiaSP;
+    public String getMauSac() {
+        return mauSac;
     }
 
-    public void setGiaSP(float GiaSP) {
-        this.GiaSP = GiaSP;
+    public void setMauSac(String mauSac) {
+        this.mauSac = mauSac;
     }
-    
-    public String getStatus(){
-        if(GiaSP >10000){
-            return "Tốt";
-        }
-        return "Bình thường";
+
+    public Integer getGia() {
+        return gia;
+    }
+
+    public void setGia(Integer gia) {
+        this.gia = gia;
+    }
+
+    public String getBoNho() {
+        return boNho;
+    }
+
+    public void setBoNho(String boNho) {
+        this.boNho = boNho;
     }
 }

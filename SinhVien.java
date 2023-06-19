@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package De5;
+package De3;
 
 import java.io.Serializable;
 
@@ -10,22 +10,20 @@ import java.io.Serializable;
  *
  * @author ADMIN
  */
-public class GiangVien implements Serializable{
+public class SinhVien implements Serializable{
     private String id;
     private String name;
-    private Integer age;
     private String gender;
-    private String chuyenNganh;
+    private int namSinh;
 
-    public GiangVien() {
+    public SinhVien() {
     }
 
-    public GiangVien(String id, String name, Integer age, String gender, String chuyenNganh) {
+    public SinhVien(String id, String name, String gender, int namSinh) {
         this.id = id;
         this.name = name;
-        this.age = age;
         this.gender = gender;
-        this.chuyenNganh = chuyenNganh;
+        this.namSinh = namSinh;
     }
 
     public String getId() {
@@ -44,14 +42,6 @@ public class GiangVien implements Serializable{
         this.name = name;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
     public String getGender() {
         return gender;
     }
@@ -60,13 +50,12 @@ public class GiangVien implements Serializable{
         this.gender = gender;
     }
 
-    public String getChuyenNganh() {
-        return chuyenNganh;
+    public int getNamSinh() {
+        return namSinh;
     }
 
-    public void setChuyenNganh(String chuyenNganh) {
-        this.chuyenNganh = chuyenNganh;
+    public void setNamSinh(int namSinh) {
+        this.namSinh = namSinh;
     }
-    
     
 }

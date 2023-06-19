@@ -2,25 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DeThi1;
+package De4;
+
+import java.io.Serializable;
 
 /**
  *
  * @author ADMIN
  */
-public class DongVat {
-    private String id, name, gioiTinh, loai;
-    private Double canNang;
+public class DongVat implements Serializable{
+    private String id;
+    private String name;
+    private String loai;
+    private String gender;
 
     public DongVat() {
     }
 
-    public DongVat(String id, String name, String gioiTinh, String loai, Double canNang) {
+    public DongVat(String id, String name, String loai, String gender) {
         this.id = id;
         this.name = name;
-        this.gioiTinh = gioiTinh;
         this.loai = loai;
-        this.canNang = canNang;
+        this.gender = gender;
     }
 
     public String getId() {
@@ -39,14 +42,6 @@ public class DongVat {
         this.name = name;
     }
 
-    public String getGioiTinh() {
-        return gioiTinh;
-    }
-
-    public void setGioiTinh(String gioiTinh) {
-        this.gioiTinh = gioiTinh;
-    }
-
     public String getLoai() {
         return loai;
     }
@@ -55,13 +50,12 @@ public class DongVat {
         this.loai = loai;
     }
 
-    public Double getCanNang() {
-        return canNang;
+    public String getGender() {
+        return gender;
     }
 
-    public void setCanNang(Double canNang) {
-        this.canNang = canNang;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
-    
     
 }

@@ -1,62 +1,33 @@
-package TEST1;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package De2;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author ADMIN
+ */
 public class DienThoaiService {
 
     private ArrayList<DienThoai> listDT = new ArrayList<>();
 
-    public ArrayList<DienThoai> fakedata() {
-        listDT.add(new DienThoai("Nokia 1", 2, 3000));
-        listDT.add(new DienThoai("Samsung 1", 1, 12000));
-        listDT.add(new DienThoai("Nokia 2", 2, 5000));
-        listDT.add(new DienThoai("Samsung 2", 1, 16000));
+    public ArrayList<DienThoai> fakeData() {
+        listDT.add(new DienThoai("DT1", "Apple", "Đen", 8000, "256"));
+        listDT.add(new DienThoai("DT1", "Apple", "Đen", 8000, "256"));
+        listDT.add(new DienThoai("DT1", "Apple", "Đen", 8000, "256"));
+        listDT.add(new DienThoai("DT1", "Apple", "Đen", 8000, "256"));
+        listDT.add(new DienThoai("DT1", "Apple", "Đen", 8000, "256"));
         return listDT;
     }
 
-    public String addDienThoai(DienThoai dt) {
-        return (dt != null && listDT.add(dt) ? "Thêm thành công" : "Thêm thất bại");
-    }
-
-    public String ghiFile(String path) {
-        File file = new File(path);
-        try {
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            try (FileOutputStream fos = new FileOutputStream(file); 
-                    ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-                for (DienThoai dt : listDT) {
-                    oos.writeObject(dt);
-                }
-            }
-            return "Ghi file thành công";
-        } catch (Exception e) {
-            return "Ghi file thất bại";
-        }
-
-    }
-    
-    public String docFile(String path){
-        File file = new File(path);
-        try {
-            if(!file.exists()){
-                return "Không tìm thấy file";
-            }
-            try(FileInputStream fis = new FileInputStream(file);
-                    ObjectInputStream ois = new ObjectInputStream(fis)){
-                while(fis.available()>0){
-                    listDT.add((DienThoai)ois.readObject());
-                }
-            }
-             return "Đọc file thành công";
-        } catch (Exception e) {
-             return "Đọc file thất bại";
+    public String addDienThoai(DienThoai DT) {
+        if (DT != null && listDT.add(DT)) {
+            return "Thêm thành công";
+        } else {
+            return "Thêm thất bại";
         }
     }
 }
