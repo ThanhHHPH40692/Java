@@ -8,6 +8,6 @@ package DeThi4;
  *
  * @author ADMIN
  */
-public class DienThoai {
+public class DienThoaiServise {
     
 }

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package De5;
+package DeThi2;
 
 import java.io.Serializable;
 
@@ -13,19 +13,19 @@ import java.io.Serializable;
 public class GiangVien implements Serializable{
     private String id;
     private String name;
-    private Integer age;
+    private String cn;
     private String gender;
-    private String chuyenNganh;
+    private int age;
 
     public GiangVien() {
     }
 
-    public GiangVien(String id, String name, Integer age, String gender, String chuyenNganh) {
+    public GiangVien(String id, String name, String cn, String gender, int age) {
         this.id = id;
         this.name = name;
-        this.age = age;
+        this.cn = cn;
         this.gender = gender;
-        this.chuyenNganh = chuyenNganh;
+        this.age = age;
     }
 
     public String getId() {
@@ -44,12 +44,12 @@ public class GiangVien implements Serializable{
         this.name = name;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getCn() {
+        return cn;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setCn(String cn) {
+        this.cn = cn;
     }
 
     public String getGender() {
@@ -60,12 +60,12 @@ public class GiangVien implements Serializable{
         this.gender = gender;
     }
 
-    public String getChuyenNganh() {
-        return chuyenNganh;
+    public int getAge() {
+        return age;
     }
 
-    public void setChuyenNganh(String chuyenNganh) {
-        this.chuyenNganh = chuyenNganh;
+    public void setAge(int age) {
+        this.age = age;
     }
     
     
