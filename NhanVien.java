@@ -1,51 +1,71 @@
+package model;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package TEST2;
-
-import java.io.Serializable;
-
 /**
  *
  * @author ADMIN
  */
-public class NhanVien implements Serializable{
-    private String ten;
-    private String chucVu;
-    private double luong;
+public class NhanVien {
+
+    private String maNV;
+    private String tenNV;
+    private Boolean gioiTinh;
+    private Integer thamNien;
 
     public NhanVien() {
     }
 
-    public NhanVien(String ten, String chucVu, double luong) {
-        this.ten = ten;
-        this.chucVu = chucVu;
-        this.luong = luong;
+    public NhanVien(String maNV, String tenNV, Boolean gioiTinh, Integer thamNien) {
+        this.maNV = maNV;
+        this.tenNV = tenNV;
+        this.gioiTinh = gioiTinh;
+        this.thamNien = thamNien;
     }
 
-    public String getTen() {
-        return ten;
+    public String getMaNV() {
+        return maNV;
     }
 
-    public void setTen(String ten) {
-        this.ten = ten;
+    public void setMaNV(String maNV) {
+        this.maNV = maNV;
     }
 
-    public String getChucVu() {
-        return chucVu;
+    public String getTenNV() {
+        return tenNV;
     }
 
-    public void setChucVu(String chucVu) {
-        this.chucVu = chucVu;
+    public void setTenNV(String tenNV) {
+        this.tenNV = tenNV;
     }
 
-    public double getLuong() {
-        return luong;
+    public Boolean getGioiTinh() {
+        return gioiTinh;
     }
 
-    public void setLuong(double luong) {
-        this.luong = luong;
+    public Object[] toRowTable() {
+        return new Object[]{maNV, tenNV, ((gioiTinh) ? "Nam" : "Nữ"), thamNien};
     }
-    
+
+    public void setGioiTinh(Boolean gioiTinh) {
+        this.gioiTinh = gioiTinh;
+    }
+
+    public Integer getThamNien() {
+        return thamNien;
+    }
+
+    public void setThamNien(Integer thamNien) {
+        this.thamNien = thamNien;
+    }
+
+    public Integer tinhThuong() {
+        if (thamNien > 12) {
+            return 500000;
+        } else {
+            return 200000;
+        }
+    }
 }
